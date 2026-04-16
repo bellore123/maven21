@@ -1,0 +1,87 @@
+package com.library;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class App {
+    public static class User {
+        public String name;
+        public String id;
+        public List<String> books = new ArrayList<>();
+        public int daysBorrowed;
+
+        public double calculateFine() {
+            int limit = 7;
+            double rate = 5.0;
+            return Math.max(0, (daysBorrowed - limit) * rate);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        User user = new User();
+
+        System.out.print("Enter Name: ");
+        user.name = sc.nextLine();
+        System.out.print("Enter ID: ");
+        user.id = sc.nextLine();
+        System.out.print("How many books? ");
+        int count = sc.nextInt();
+        sc.nextLine();
+
+        for (int i = 0; i < count; i++) {
+            System.out.print("Enter book title: ");
+            user.books.add(sc.nextLine());
+        }
+
+        System.out.print("Days borrowed: ");
+        user.daysBorrowed = sc.nextInt();
+
+        System.out.println("\n--- Report ---");
+        System.out.println("User: " + user.name + " (" + user.id + ")");
+        System.out.println("Books: " + user.books);
+        System.out.println("Total Fine: $" + user.calculateFine());
+        sc.close();
+    }
+}
+Use code with caution.
+3. AppTest.java
+Located in src/test/java/com/library/AppTest.java, this file ensures the fine logic works correctly. 
+Apache Maven
+Apache Maven
+java
+package com.library;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+public class AppTest {
+    @Test
+    public void testFineCalculation() {
+        App.User user = new App.User();
+        user.daysBorrowed = 10; // 3 days overdue
+        assertEquals(15.0, user.calculateFine(), "Fine should be 15.0 for 3 days late");
+    }
+
+    @Test
+    public void testNoFine() {
+        App.User user = new App.User();
+        user.daysBorrowed = 5; // Within 7-day limit
+        assertEquals(0.0, user.calculateFine(), "Fine should be 0.0 if returned on time");
+    }
+}
+Use code with caution.
+Would you like instructions on how to compile and run these files using the Maven command line?
+
+
+
+
+
+undefined
+1 site
+Maven in 5 Minutes
+5 Aug 2025 — my-app |-- pom.xml `-- src |-- main | `-- java | `-- com | `-- mycompany | `-- app | `-- App.java `-- test `-- java `-- com `-- my...
+
+
+Apache Maven
