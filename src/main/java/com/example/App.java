@@ -42,6 +42,7 @@ public class App {
         System.out.println("User: " + user.name + " (" + user.id + ")");
         System.out.println("Books: " + user.books);
         System.out.println("Total Fine: $" + user.calculateFine());
+        System.out.println("After modification");
         sc.close();
     }
 }

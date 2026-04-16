@@ -16,5 +16,6 @@ public class AppTest {
         App.User user = new App.User();
         user.daysBorrowed = 5; // Within 7-day limit
         assertEquals(0.0, user.calculateFine(), "Fine should be 0.0 if returned on time");
+        System.out.println("After modification");
     }
 }
